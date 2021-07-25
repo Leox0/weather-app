@@ -23,7 +23,6 @@ public class WeatherController {
     @RequestMapping("")
     public String index(@ModelAttribute WeatherCriteria weatherCriteria, Model model){
         model.addAttribute("weather", weatherService.getWeather(weatherCriteria.getCity()));
-
         return "index";
     }
 

@@ -15,11 +15,6 @@ public class DummyWeatherProvider implements WeatherProvider {
     }
 
     @Override
-    public WeatherStats forecast() {
-        return new WeatherStats(20.0);
-    }
-
-    @Override
     public WeatherStats forecast(String city) {
         return weathers.getOrDefault(city, new WeatherStats(-100.0));
     }

@@ -11,11 +11,6 @@ public class GoWeatherProvider implements WeatherProvider {
     RestTemplate restTemplate = new RestTemplate();
 
     @Override
-    public WeatherStats forecast() {
-        return getWeather("Lodz");
-    }
-
-    @Override
     public WeatherStats forecast(String city) {
         return getWeather(city);
     }

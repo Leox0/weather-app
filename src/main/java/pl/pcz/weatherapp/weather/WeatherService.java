@@ -4,24 +4,36 @@ import org.springframework.stereotype.Service;
 import pl.pcz.weatherapp.weather.provider.WeatherProvider;
 import pl.pcz.weatherapp.weather.provider.goweather.GoWeatherProvider;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class WeatherService {
 
     private final WeatherProvider weatherProvider;
+    private final WeatherPhotoRepository weatherPhotoRepository;
 
     public WeatherService() {
+        this.weatherPhotoRepository = new InMemoryWeatherPhotoRepository();
         this.weatherProvider = new GoWeatherProvider();
     }
 
     public Weather getWeather() {
-        WeatherStats stats = weatherProvider.forecast();
-        return new Weather("Lodz",stats, new ArrayList<>());
+        String defaultCity = "Lodz";
+        return createCity(defaultCity);
     }
 
-    public Weather getWeather(String city){
-        WeatherStats stats = weatherProvider.forecast(city);
-        return new Weather(city,stats, new ArrayList<>());
+    public Weather getWeather(String city) {
+        return createCity(city);
     }
+
+    private Weather createCity(String city) {
+        WeatherStats stats = weatherProvider.forecast(city);
+        List<WeatherPhoto> photos = weatherPhotoRepository.findByCity(city);
+        return new Weather(city, stats, photos);
+    }
+
+    public void addWeatherPhoto(WeatherPhoto photo) {
+        weatherPhotoRepository.save(photo);
+    }
+
 }

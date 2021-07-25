@@ -11,7 +11,7 @@ public class GoWeatherProviderTest {
     public void consume() {
         GoWeatherProvider goWeatherProvider = new GoWeatherProvider();
 
-        WeatherStats forecast = goWeatherProvider.forecast();
+        WeatherStats forecast = goWeatherProvider.forecast("Lodz");
         assertNotNull(forecast);
     }
 

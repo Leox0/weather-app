@@ -1,10 +1,28 @@
 package pl.pcz.weatherapp.weather.photo;
 
-public class WeatherPhotoService {
-    private final WeatherPhotoRepository weatherPhotoRepository;
+import org.springframework.stereotype.Service;
 
-    public WeatherPhotoService(WeatherPhotoRepository weatherPhotoRepository) {
-        this.weatherPhotoRepository = weatherPhotoRepository;
+import java.util.List;
+
+@Service
+public class WeatherPhotoService {
+
+    private final WeatherPhotoRepository weatherPhotoRepository;
+    private CloudinaryService cloudinaryService;
+
+    public WeatherPhotoService(CloudinaryService cloudinaryService) {
+        this.weatherPhotoRepository = new InMemoryWeatherPhotoRepository();
+        this.cloudinaryService = cloudinaryService;
     }
+
+    public List<WeatherPhoto> findByCity(String city) {
+        return weatherPhotoRepository.findByCity(city);
+    }
+
+    public void save(WeatherPhoto photo) {
+        String url = cloudinaryService.upload(photo.getImage());
+        weatherPhotoRepository.save(photo.withUrl(url));
+    }
+
 
 }

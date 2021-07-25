@@ -1,9 +1,8 @@
 package pl.pcz.weatherapp.weather;
 
 import org.springframework.stereotype.Service;
-import pl.pcz.weatherapp.weather.photo.InMemoryWeatherPhotoRepository;
 import pl.pcz.weatherapp.weather.photo.WeatherPhoto;
-import pl.pcz.weatherapp.weather.photo.WeatherPhotoRepository;
+import pl.pcz.weatherapp.weather.photo.WeatherPhotoService;
 import pl.pcz.weatherapp.weather.provider.WeatherProvider;
 import pl.pcz.weatherapp.weather.provider.goweather.GoWeatherProvider;
 
@@ -13,10 +12,10 @@ import java.util.List;
 public class WeatherService {
 
     private final WeatherProvider weatherProvider;
-    private final WeatherPhotoRepository weatherPhotoRepository;
+    private final WeatherPhotoService weatherPhotoService;
 
-    public WeatherService() {
-        this.weatherPhotoRepository = new InMemoryWeatherPhotoRepository();
+    public WeatherService(WeatherPhotoService weatherPhotoService) {
+        this.weatherPhotoService = weatherPhotoService;
         this.weatherProvider = new GoWeatherProvider();
     }
 
@@ -31,12 +30,12 @@ public class WeatherService {
 
     private Weather createCity(String city) {
         WeatherStats stats = weatherProvider.forecast(city);
-        List<WeatherPhoto> photos = weatherPhotoRepository.findByCity(city);
+        List<WeatherPhoto> photos = weatherPhotoService.findByCity(city);
         return new Weather(city, stats, photos);
     }
 
     public void addWeatherPhoto(WeatherPhoto photo) {
-        weatherPhotoRepository.save(photo);
+        weatherPhotoService.save(photo);
     }
 
 }

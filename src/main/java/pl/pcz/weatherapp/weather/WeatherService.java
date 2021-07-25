@@ -1,6 +1,9 @@
 package pl.pcz.weatherapp.weather;
 
 import org.springframework.stereotype.Service;
+import pl.pcz.weatherapp.weather.photo.InMemoryWeatherPhotoRepository;
+import pl.pcz.weatherapp.weather.photo.WeatherPhoto;
+import pl.pcz.weatherapp.weather.photo.WeatherPhotoRepository;
 import pl.pcz.weatherapp.weather.provider.WeatherProvider;
 import pl.pcz.weatherapp.weather.provider.goweather.GoWeatherProvider;
 

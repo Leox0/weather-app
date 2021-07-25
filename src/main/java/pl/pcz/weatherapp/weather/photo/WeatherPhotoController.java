@@ -1,10 +1,11 @@
-package pl.pcz.weatherapp.weather;
+package pl.pcz.weatherapp.weather.photo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.pcz.weatherapp.weather.WeatherService;
 
 @Controller
 @RequestMapping("/photos")

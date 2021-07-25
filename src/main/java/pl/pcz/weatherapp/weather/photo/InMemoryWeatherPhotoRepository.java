@@ -1,4 +1,4 @@
-package pl.pcz.weatherapp.weather;
+package pl.pcz.weatherapp.weather.photo;
 
 import java.util.HashMap;
 import java.util.List;

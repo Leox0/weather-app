@@ -1,4 +1,4 @@
-package pl.pcz.weatherapp.weather;
+package pl.pcz.weatherapp.weather.photo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
